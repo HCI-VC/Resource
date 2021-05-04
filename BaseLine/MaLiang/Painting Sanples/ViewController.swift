@@ -10,7 +10,7 @@ import UIKit
 import MaLiang
 import Comet
 import Chrysan
-//import Zip
+import Zip
 
 class ViewController: UIViewController {
     
@@ -38,8 +38,12 @@ class ViewController: UIViewController {
         return try canvas.registerBrush(name: imageName, textureID: texture.id)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden=true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden=false
         // Do any additional setup after loading the view, typically from a nib.
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -56,12 +60,13 @@ class ViewController: UIViewController {
     func registerBrushes() {
         do {
             let pen = canvas.defaultBrush!
-            pen.name = "Pen"
+            pen.name = "钢笔"
             pen.pointSize = 5
             pen.pointStep = 0.5
             pen.color = color
             
             let pencil = try registerBrush(with: "pencil")
+            pencil.name="铅笔"
             pencil.rotation = .random
             pencil.pointSize = 3
             pencil.pointStep = 2
@@ -69,6 +74,7 @@ class ViewController: UIViewController {
             pencil.opacity = 1
             
             let brush = try registerBrush(with: "brush")
+            brush.name="笔刷"
             brush.opacity = 1
             brush.rotation = .ahead
             brush.pointSize = 15
@@ -79,12 +85,14 @@ class ViewController: UIViewController {
             
             let texture = try canvas.makeTexture(with: UIImage(named: "glow")!.pngData()!)
             let glow: GlowingBrush = try canvas.registerBrush(name: "glow", textureID: texture.id)
+            glow.name="荧光"
             glow.opacity = 0.5
             glow.coreProportion = 0.2
             glow.pointSize = 20
             glow.rotation = .ahead
             
             let claw = try registerBrush(with: "claw")
+            claw.name="痕迹"
             claw.rotation = .ahead
             claw.pointSize = 30
             claw.pointStep = 5
@@ -93,6 +101,7 @@ class ViewController: UIViewController {
             
             /// make a chartlet brush
             let chartletBrush = try ChartletBrush(name: "Chartlet", imageNames: ["rect-1", "rect-2", "rect-3"], target: canvas)
+            chartletBrush.name="点点图"
             chartletBrush.renderStyle = .ordered
             chartletBrush.rotation = .random
             
@@ -102,6 +111,7 @@ class ViewController: UIViewController {
             
             /// make eraser with default round point
             let eraser = try! canvas.registerBrush(name: "Eraser") as Eraser
+            eraser.name="橡皮擦"
             eraser.opacity = 1
             
             brushes = [pen, pencil, brush, glow, claw, chartletBrush, eraser]
@@ -111,7 +121,7 @@ class ViewController: UIViewController {
             alert.addAction(title: "确定", style: .cancel)
             self.present(alert, animated: true, completion: nil)
         } catch {
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            let alert = UIAlertController(title: "错误", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(title: "确定", style: .cancel)
             self.present(alert, animated: true, completion: nil)
         }
@@ -165,17 +175,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func moreAction(_ sender: UIBarButtonItem) {
-        let actionSheet = UIAlertController(title: "Choose Actions", message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(title: "Add Chartlet", style: .default) { [unowned self] (_) in
+        let actionSheet = UIAlertController(title: "选项", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(title: "贴图", style: .default) { [unowned self] (_) in
             self.addChartletAction()
         }
-        actionSheet.addAction(title: "Snapshot", style: .default) { [unowned self] (_) in
+        actionSheet.addAction(title: "预览", style: .default) { [unowned self] (_) in
             self.snapshotAction(sender)
         }
-        actionSheet.addAction(title: "Save", style: .default) { [unowned self] (_) in
+        actionSheet.addAction(title: "暂存", style: .default) { [unowned self] (_) in
             self.saveData()
         }
-        actionSheet.addAction(title: "Cancel", style: .cancel)
+        actionSheet.addAction(title: "取消", style: .cancel)
         actionSheet.popoverPresentationController?.barButtonItem = sender
         present(actionSheet, animated: true, completion: nil)
     }
@@ -200,25 +210,25 @@ class ViewController: UIViewController {
     }
     
     func saveData() {
-        self.chrysan.showMessage("Saving...")
+        self.chrysan.showMessage("暂存中...")
         let exporter = DataExporter(canvas: canvas)
         let path = Path.temp().resource(Date().string())
         path.createDirectory()
         exporter.save(to: path.url, progress: { (progress) in
-            self.chrysan.show(progress: progress, message: "Saving...")
+            self.chrysan.show(progress: progress, message: "暂存中...")
         }) { (result) in
             if case let .failure(error) = result {
                 self.chrysan.hide()
-                let alert = UIAlertController(title: "Saving Failed", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(title: "OK", style: .cancel)
+                let alert = UIAlertController(title: "暂存失败", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(title: "完成", style: .cancel)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                //let filename = "\(Date().string(format: "yyyyMMddHHmmss")).maliang"
+                let filename = "\(Date().string(format: "yyyyMMddHHmmss")).lmz"
                 
-                //let contents = try! FileManager.default.contentsOfDirectory(at: path.url, includingPropertiesForKeys: [], options: .init(rawValue: 0))
-                //try? Zip.zipFiles(paths: contents, zipFilePath: Path.documents().resource(filename).url, password: nil, progress: nil)
+                let contents = try! FileManager.default.contentsOfDirectory(at: path.url, includingPropertiesForKeys: [], options: .init(rawValue: 0))
+                try? Zip.zipFiles(paths: contents, zipFilePath: Path.documents().resource(filename).url, password: nil, progress: nil)
                 try? FileManager.default.removeItem(at: path.url)
-                self.chrysan.show(.succeed, message: "Saving Succeed!", hideDelay: 1)
+                self.chrysan.show(.succeed, message: "暂存成功!", hideDelay: 1)
             }
         }
     }
@@ -227,7 +237,7 @@ class ViewController: UIViewController {
         guard let file = filePath else {
             return
         }
-        chrysan.showMessage("Reading...")
+        chrysan.showMessage("读取中...")
         
         let path = Path(file)
         let temp = Path.temp().resource("temp.zip")
@@ -236,11 +246,11 @@ class ViewController: UIViewController {
         do {
             try? FileManager.default.removeItem(at: temp.url)
             try FileManager.default.copyItem(at: path.url, to: temp.url)
-           // try Zip.unzipFile(temp.url, destination: contents.url, overwrite: true, password: nil)
+            try Zip.unzipFile(temp.url, destination: contents.url, overwrite: true, password: nil)
         } catch {
             self.chrysan.hide()
-            let alert = UIAlertController(title: "unzip failed", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(title: "OK", style: .cancel)
+            let alert = UIAlertController(title: "解压失败", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(title: "完成", style: .cancel)
             self.present(alert, animated: true, completion: nil)
             return
         }
@@ -251,11 +261,11 @@ class ViewController: UIViewController {
         }) { (result) in
             if case let .failure(error) = result {
                 self.chrysan.hide()
-                let alert = UIAlertController(title: "Reading Failed", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(title: "OK", style: .cancel)
+                let alert = UIAlertController(title: "读取失败", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(title: "完成", style: .cancel)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                self.chrysan.show(.succeed, message: "Reading Succeed!", hideDelay: 1)
+                self.chrysan.show(.succeed, message: "读取成功!", hideDelay: 1)
             }
             
         }

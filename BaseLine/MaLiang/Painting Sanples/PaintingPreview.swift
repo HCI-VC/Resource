@@ -77,7 +77,9 @@ class PaintingPreview: UIViewController {
         case .restricted:
             let error = NSError(domain: "Ablunm Authorization", code: -99, userInfo: [NSLocalizedDescriptionKey: "can not access album"])
             finished(error)
-        @unknown default: break
+        //case .limited:
+          
+        default: break
         }
     }
 }
