@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y44-dU-nDf">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y44-dU-nDf">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +11,7 @@
         <!--Chartlet Picker-->
         <scene sceneID="FlM-3g-oKQ">
             <objects>
-                <viewController id="y44-dU-nDf" customClass="ChartletPicker" customModule="MaLiang_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="y44-dU-nDf" customClass="ChartletPicker" customModule="水墨" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X3f-wl-QbS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,7 +33,7 @@
                                     <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChartletPickerItemCell" id="wv3-kE-qnM" customClass="ChartletPickerItemCell" customModule="MaLiang_Example" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChartletPickerItemCell" id="wv3-kE-qnM" customClass="ChartletPickerItemCell" customModule="水墨" customModuleProvider="target">
                                         <rect key="frame" x="15" y="0.0" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -71,6 +69,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="2H6-z0-1pF"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6La-bV-AjJ" firstAttribute="leading" secondItem="2H6-z0-1pF" secondAttribute="leading" id="EeM-k7-gu3"/>
@@ -81,7 +80,6 @@
                             <constraint firstItem="Qz1-uC-Pf1" firstAttribute="top" secondItem="X3f-wl-QbS" secondAttribute="top" id="qY6-7s-4wH"/>
                             <constraint firstItem="Qz1-uC-Pf1" firstAttribute="leading" secondItem="X3f-wl-QbS" secondAttribute="leading" id="u3l-17-IJq"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="2H6-z0-1pF"/>
                     </view>
                     <connections>
                         <outlet property="backgroundView" destination="Qz1-uC-Pf1" id="L0l-G3-zCL"/>
@@ -95,7 +93,7 @@
         <!--Chartlet Editor-->
         <scene sceneID="gOC-Kt-8wH">
             <objects>
-                <viewController storyboardIdentifier="ChartletEditor" id="rl2-1D-bMY" customClass="ChartletEditor" customModule="MaLiang_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChartletEditor" id="rl2-1D-bMY" customClass="ChartletEditor" customModule="水墨" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7S8-I9-Lbj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -210,6 +208,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZIR-fI-7Hp"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6BS-oG-IVF" firstAttribute="leading" secondItem="kbw-xc-VOE" secondAttribute="leading" id="GLJ-46-dSN"/>
@@ -221,7 +220,6 @@
                             <constraint firstItem="ZIR-fI-7Hp" firstAttribute="trailing" secondItem="aQB-Hg-lg6" secondAttribute="trailing" constant="20" id="uD0-sV-waZ"/>
                             <constraint firstItem="ZIR-fI-7Hp" firstAttribute="bottom" secondItem="aQB-Hg-lg6" secondAttribute="bottom" constant="20" id="uFz-wX-m97"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ZIR-fI-7Hp"/>
                     </view>
                     <connections>
                         <outlet property="container" destination="BOz-iT-DCp" id="okv-5a-Hc4"/>

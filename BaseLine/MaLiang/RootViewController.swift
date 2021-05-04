@@ -41,11 +41,18 @@ class RootViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let vcs = navigationController?.viewControllers, vcs.count == 1 {
-            performSegue(withIdentifier: "default", sender: nil)
-        }
+        //if let vcs = navigationController?.viewControllers, vcs.count == 1 {
+        //    performSegue(withIdentifier: "default", sender: nil)
+        //}
+        self.navigationController?.isNavigationBarHidden=true
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden=true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden=false
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

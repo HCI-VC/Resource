@@ -1,0 +1,14 @@
+Target dependency graph (7 targets)
+Chrysan-Chrysan in Pods
+Chrysan in Pods, depends on:
+Chrysan-Chrysan in Pods (explicit)
+Comet in Pods
+MaLiang in Pods
+SnapKit in Pods
+Zip in Pods
+Pods-MaLiang_Example in Pods, depends on:
+Chrysan in Pods (explicit)
+Comet in Pods (explicit)
+MaLiang in Pods (explicit)
+SnapKit in Pods (explicit)
+Zip in Pods (explicit)

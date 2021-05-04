@@ -21,10 +21,12 @@ class SavedFilesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden=false
         super.viewWillAppear(animated)
         let path = Path.documents()
         let contents = try? FileManager.default.contentsOfDirectory(atPath: path.string).sorted().reversed()
         files = contents?.compactMap { $0 == "Inbox" ? nil : path.resource($0) } ?? []
+        print(files.count)
         tableView.reloadData()
     }
     
