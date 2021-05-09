@@ -24,7 +24,7 @@ open class ChartletPicker: UIViewController {
         picker.options = options
         picker.resultHandler = result
         picker.modalPresentationStyle = .overCurrentContext
-        picker.modalTransitionStyle = .crossDissolve
+        picker.modalTransitionStyle = .crossDissolve //交叉溶解跳转动画
         source.present(picker, animated: true, completion: nil)
     }
 
@@ -60,7 +60,8 @@ open class ChartletPicker: UIViewController {
 
     // MARK: - Animations
     private func runAppearAnimations() {
-        let transform = CGAffineTransform(translationX: 0, y: view.bounds.height - collectionView.frame.origin.y + 20)
+        let transform = CGAffineTransform(translationX: 0, y: view.bounds.height - collectionView.frame.origin.y + 200)
+        //The fucking guy is very clever. Tranform to transform and then transform to .identity.
         collectionView.transform = transform
         UIView.animate(withDuration: 0.2) {
             self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.35)
@@ -70,9 +71,11 @@ open class ChartletPicker: UIViewController {
     
     private func runDisappearAnimations(completion: ((Bool) -> Void)? = nil) {
         let endTransform = view.bounds.height - collectionView.frame.origin.y + 20
+    
         UIView.animate(withDuration: 0.2, animations: {
             self.backgroundView.backgroundColor = .clear
             self.collectionView.transform = CGAffineTransform(translationX: 0, y: endTransform)
+            
         }, completion: completion)
     }
 

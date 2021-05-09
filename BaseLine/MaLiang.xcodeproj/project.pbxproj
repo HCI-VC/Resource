@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3206061AEBC900E6419B1AC1 /* Pods_MaLiang_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17636DA7E81A7C670D9DA927 /* Pods_MaLiang_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -25,14 +24,33 @@
 		C39C35A72259FBCB00DA0519 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39C35A62259FBCB00DA0519 /* RootViewController.swift */; };
 		C39C35AB2259FBD100DA0519 /* PaintingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39C35A82259FBD100DA0519 /* PaintingPreview.swift */; };
 		C39C35AD2259FBD100DA0519 /* ScrollableSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39C35AA2259FBD100DA0519 /* ScrollableSample.swift */; };
-		C39C35BF2259FD7A00DA0519 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C39C35BE2259FD7A00DA0519 /* Main.storyboard */; };
 		C3D0644A22685FCF00DD6632 /* ScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D0644922685FCF00DD6632 /* ScrollingViewController.swift */; };
 		C3F3749722729A2E00F34376 /* TextureElementSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3749622729A2E00F34376 /* TextureElementSamples.swift */; };
+		CE1B9F39264155800002A65D /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1B9F38264155800002A65D /* SideMenu.framework */; };
+		CE1B9F3A264155800002A65D /* SideMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE1B9F38264155800002A65D /* SideMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE4AFE302646879A0032349C /* PicPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4AFE2F2646879A0032349C /* PicPicker.storyboard */; };
+		CE6FF40A2647A35A007B8EC7 /* PicPickeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6FF4092647A35A007B8EC7 /* PicPickeViewController.swift */; };
+		CE815D42263ED27700E604C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C39C35BE2259FD7A00DA0519 /* Main.storyboard */; };
+		CE815D47263FDCCD00E604C0 /* Pods_MaLiang_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17636DA7E81A7C670D9DA927 /* Pods_MaLiang_Example.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE1B9F3B264155810002A65D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE1B9F3A264155800002A65D /* SideMenu.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		17636DA7E81A7C670D9DA927 /* Pods_MaLiang_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaLiang_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACD01AFB9204008FA782 /* 水墨.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "水墨.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* 群青.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "群青.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,8 +77,12 @@
 		C3F3749622729A2E00F34376 /* TextureElementSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureElementSamples.swift; sourceTree = "<group>"; };
 		C6F28C17C7927FA0ED972567 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C847720412563A4B8BD1C035 /* Pods_MaLiang_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaLiang_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1B9F2B26413BB40002A65D /* MaLiang.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = MaLiang.podspec; path = ../MaLiang.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CE1B9F38264155800002A65D /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4AFE2F2646879A0032349C /* PicPicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PicPicker.storyboard; sourceTree = "<group>"; };
+		CE6FF4092647A35A007B8EC7 /* PicPickeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicPickeViewController.swift; sourceTree = "<group>"; };
+		CEC1D82F264132DF00D91920 /* MaLiang */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MaLiang; sourceTree = "<group>"; };
 		D76EE9D69205D147C25FBFCA /* Pods-MaLiang_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaLiang_Example.debug.xcconfig"; path = "Target Support Files/Pods-MaLiang_Example/Pods-MaLiang_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		F33BD5AE4C677E1850ACE9D1 /* MaLiang.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MaLiang.podspec; path = ../MaLiang.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F856FEC335048D43A107FD49 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		FAB04562EF462307E247C51B /* Pods-MaLiang_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaLiang_Tests.debug.xcconfig"; path = "Target Support Files/Pods-MaLiang_Tests/Pods-MaLiang_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3206061AEBC900E6419B1AC1 /* Pods_MaLiang_Example.framework in Frameworks */,
+				CE1B9F39264155800002A65D /* SideMenu.framework in Frameworks */,
+				CE815D47263FDCCD00E604C0 /* Pods_MaLiang_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +103,8 @@
 		3532227EA8F3B9732E5108EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE1B9F38264155800002A65D /* SideMenu.framework */,
+				CEC1D82F264132DF00D91920 /* MaLiang */,
 				17636DA7E81A7C670D9DA927 /* Pods_MaLiang_Example.framework */,
 				C847720412563A4B8BD1C035 /* Pods_MaLiang_Tests.framework */,
 			);
@@ -101,7 +126,7 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* 水墨.app */,
+				607FACD01AFB9204008FA782 /* 群青.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +144,7 @@
 				C3617DAC2272CDBB00E5DC7C /* File Samples */,
 				C3617DBF22733EFB00E5DC7C /* Components */,
 				C3617DAD2272EA8E00E5DC7C /* Textures */,
+				CE4AFE31264687DC0032349C /* PicPicker */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for MaLiang";
@@ -136,7 +162,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				F33BD5AE4C677E1850ACE9D1 /* MaLiang.podspec */,
+				CE1B9F2B26413BB40002A65D /* MaLiang.podspec */,
 				F856FEC335048D43A107FD49 /* README.md */,
 				C6F28C17C7927FA0ED972567 /* LICENSE */,
 			);
@@ -204,6 +230,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		CE4AFE31264687DC0032349C /* PicPicker */ = {
+			isa = PBXGroup;
+			children = (
+				CE4AFE2F2646879A0032349C /* PicPicker.storyboard */,
+				CE6FF4092647A35A007B8EC7 /* PicPickeViewController.swift */,
+			);
+			path = PicPicker;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -216,6 +251,7 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				638379FFFDEFCB11E76B1EDB /* [CP] Embed Pods Frameworks */,
+				CE1B9F3B264155810002A65D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -223,7 +259,7 @@
 			);
 			name = MaLiang_Example;
 			productName = MaLiang;
-			productReference = 607FACD01AFB9204008FA782 /* 水墨.app */;
+			productReference = 607FACD01AFB9204008FA782 /* 群青.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -233,13 +269,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 98ZHS2KGLZ;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -267,9 +303,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3617DB92272EC5D00E5DC7C /* pencil.png in Resources */,
+				CE4AFE302646879A0032349C /* PicPicker.storyboard in Resources */,
 				C3617DB72272EB2400E5DC7C /* brush.png in Resources */,
 				C35E4454227E887B005C612D /* claw.png in Resources */,
-				C39C35BF2259FD7A00DA0519 /* Main.storyboard in Resources */,
+				CE815D42263ED27700E604C0 /* Main.storyboard in Resources */,
 				C35AF7C3227F265E0019ACC3 /* glow.png in Resources */,
 				C3617DC22273F8C500E5DC7C /* ChartletPicker.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
@@ -307,8 +344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MaLiang_Example/Pods-MaLiang_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Chrysan/Chrysan.framework",
@@ -318,8 +353,6 @@
 				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Chrysan.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Comet.framework",
@@ -344,6 +377,7 @@
 				C3617DC42273FFDB00E5DC7C /* ChartletEditor.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				CE6FF40A2647A35A007B8EC7 /* PicPickeViewController.swift in Sources */,
 				C30B2D35226F06B400E3429A /* SavedFilesViewController.swift in Sources */,
 				C3D0644A22685FCF00DD6632 /* ScrollingViewController.swift in Sources */,
 				C3617DC6227407FC00E5DC7C /* ChartletImageCache.swift in Sources */,
@@ -391,6 +425,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -416,7 +451,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -448,6 +483,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -466,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -484,14 +520,14 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				DEVELOPMENT_TEAM = 98ZHS2KGLZ;
 				INFOPLIST_FILE = MaLiang/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "--";
-				PRODUCT_NAME = "水墨";
-				SUPPORTS_MACCATALYST = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "-1047666945";
+				PRODUCT_NAME = "群青";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -504,14 +540,14 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				DEVELOPMENT_TEAM = 98ZHS2KGLZ;
 				INFOPLIST_FILE = MaLiang/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "--";
-				PRODUCT_NAME = "水墨";
-				SUPPORTS_MACCATALYST = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "-1047666945";
+				PRODUCT_NAME = "群青";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
