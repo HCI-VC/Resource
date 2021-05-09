@@ -39,21 +39,21 @@
                             <tableViewSection id="gwR-Vg-Oww">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="0.0" rowHeight="329" id="ml9-kF-HL5">
-                                        <rect key="frame" x="0.0" y="24.5" width="1366" height="329"/>
+                                        <rect key="frame" x="0.0" y="25" width="1366" height="329"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ml9-kF-HL5" id="mhN-Ug-c7F">
                                             <rect key="frame" x="0.0" y="0.0" width="1366" height="329"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5W-uX-2jJ">
-                                                    <rect key="frame" x="558" y="47" width="246" height="127"/>
+                                                    <rect key="frame" x="558" y="48" width="246" height="127"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="创作模式">
                                                         <color key="titleShadowColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pvZ-cr-hI0">
-                                                    <rect key="frame" x="1075" y="47" width="246" height="127"/>
+                                                    <rect key="frame" x="1075" y="48" width="246" height="127"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="自由模式">
                                                         <color key="titleShadowColor" systemColor="scrollViewTexturedBackgroundColor"/>
@@ -81,7 +81,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pAn-a4-lGJ">
-                                                    <rect key="frame" x="58" y="47" width="231" height="127"/>
+                                                    <rect key="frame" x="58" y="48" width="231" height="127"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="临摹模式">
                                                         <color key="titleShadowColor" systemColor="scrollViewTexturedBackgroundColor"/>
@@ -121,7 +121,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="读取存档" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H59-B6-BI2">
-                                                    <rect key="frame" x="1260" y="146" width="132" height="60"/>
+                                                    <rect key="frame" x="1260" y="145" width="132" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -202,7 +202,7 @@
         <!--Single View-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="vXZ-lx-hvc" customClass="ViewController" customModule="群青" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="Single View" id="vXZ-lx-hvc" customClass="ViewController" customModule="群青" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -211,94 +211,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JK1-D2-5F7" customClass="Canvas" customModule="MaLiang">
-                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
-                                <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arX-yu-Unn">
-                                        <rect key="frame" x="1132" y="250" width="48" height="45"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="Undo">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="undoAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ruD-k3-Qrq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9t-VJ-CAY">
-                                        <rect key="frame" x="1205" y="250" width="48" height="45"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="Redo">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="redoAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="v7q-aT-od9"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宽度" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Seo-Lp-TI0">
-                                        <rect key="frame" x="95" y="984.5" width="43" height="25.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="50" id="y2M-JQ-hAq">
-                                        <rect key="frame" x="166" y="980" width="1027" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <action selector="changeSizeAction:" destination="vXZ-lx-hvc" eventType="valueChanged" id="1eg-Zu-CyY"/>
-                                        </connections>
-                                    </slider>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoO-2f-vXQ">
-                                        <rect key="frame" x="1221" y="984.5" width="9.5" height="25.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7T-Is-9js">
-                                        <rect key="frame" x="1286" y="250" width="48" height="45"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="Clear">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="clearAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="YoX-yV-8pC"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JK1-D2-5F7" customClass="Canvas" customModule="MaLiang">
+                                <rect key="frame" x="-2" y="0.0" width="1366" height="1024"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="X7T-Is-9js" firstAttribute="leading" secondItem="N9t-VJ-CAY" secondAttribute="trailing" constant="49" id="Mp7-Ka-0bD"/>
-                                    <constraint firstAttribute="bottom" secondItem="IoO-2f-vXQ" secondAttribute="bottom" constant="14" id="PBV-re-1Np"/>
-                                    <constraint firstItem="Seo-Lp-TI0" firstAttribute="trailing" secondItem="y2M-JQ-hAq" secondAttribute="leading" constant="-30" id="S5q-oW-AJr"/>
-                                    <constraint firstItem="arX-yu-Unn" firstAttribute="top" secondItem="JK1-D2-5F7" secondAttribute="top" constant="250" id="WeD-nJ-GRm"/>
-                                    <constraint firstItem="IoO-2f-vXQ" firstAttribute="leading" secondItem="y2M-JQ-hAq" secondAttribute="trailing" constant="30" id="Z6D-fg-zck"/>
-                                    <constraint firstItem="N9t-VJ-CAY" firstAttribute="top" secondItem="JK1-D2-5F7" secondAttribute="top" constant="250" id="nSC-qr-evl"/>
-                                    <constraint firstAttribute="trailing" secondItem="X7T-Is-9js" secondAttribute="trailing" constant="16" id="nVy-z2-zTr"/>
-                                    <constraint firstAttribute="bottom" secondItem="Seo-Lp-TI0" secondAttribute="bottom" constant="14" id="o4t-gs-NlZ"/>
-                                    <constraint firstItem="X7T-Is-9js" firstAttribute="top" secondItem="JK1-D2-5F7" secondAttribute="top" constant="248" id="rh0-hg-6Uw"/>
-                                    <constraint firstItem="N9t-VJ-CAY" firstAttribute="leading" secondItem="arX-yu-Unn" secondAttribute="trailing" constant="25" id="vi6-gs-EZd"/>
-                                </constraints>
                             </view>
                             <view clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFV-Mf-5bf">
                                 <rect key="frame" x="1115" y="15" width="236" height="136"/>
@@ -455,8 +370,81 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcw-7M-Bbe">
+                                <rect key="frame" x="563" y="448" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" image="YES" adjustable="YES"/>
+                                </accessibility>
+                            </imageView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arX-yu-Unn">
+                                <rect key="frame" x="1133" y="180" width="60" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Z32-3t-Gvf"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="Undo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="undoAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ruD-k3-Qrq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7T-Is-9js">
+                                <rect key="frame" x="1280" y="180" width="60" height="90"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="Clear">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clearAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="YoX-yV-8pC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9t-VJ-CAY">
+                                <rect key="frame" x="1200" y="180" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="57s-28-jJ3"/>
+                                    <constraint firstAttribute="height" constant="60" id="Y8g-oT-YRt"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="Redo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="redoAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="v7q-aT-od9"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="50" id="y2M-JQ-hAq">
+                                <rect key="frame" x="169" y="941" width="1027" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="changeSizeAction:" destination="vXZ-lx-hvc" eventType="valueChanged" id="1eg-Zu-CyY"/>
+                                </connections>
+                            </slider>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AID-gC-Kue">
-                                <rect key="frame" x="16" y="908" width="1330" height="32"/>
+                                <rect key="frame" x="17" y="878" width="1330" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="钢笔"/>
@@ -468,18 +456,41 @@
                                     <action selector="styleChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="flD-Jd-1qp"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoO-2f-vXQ">
+                                <rect key="frame" x="1227" y="944" width="70" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="宽度" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Seo-Lp-TI0">
+                                <rect key="frame" x="99" y="944" width="43" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="arX-yu-Unn" firstAttribute="top" secondItem="N9t-VJ-CAY" secondAttribute="top" id="8Ua-lR-G2a"/>
+                            <constraint firstItem="X7T-Is-9js" firstAttribute="leading" secondItem="N9t-VJ-CAY" secondAttribute="trailing" constant="20" id="8vw-6l-0Fe"/>
+                            <constraint firstItem="X7T-Is-9js" firstAttribute="top" secondItem="N9t-VJ-CAY" secondAttribute="top" id="Ch6-jK-Lb8"/>
+                            <constraint firstAttribute="trailing" secondItem="N9t-VJ-CAY" secondAttribute="trailing" constant="106" id="CzF-Cx-N1k"/>
+                            <constraint firstItem="X7T-Is-9js" firstAttribute="baseline" secondItem="N9t-VJ-CAY" secondAttribute="baseline" id="FKc-kg-yNt"/>
                             <constraint firstItem="GFV-Mf-5bf" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="15" id="J2f-lc-sGo"/>
                             <constraint firstAttribute="bottom" secondItem="JK1-D2-5F7" secondAttribute="bottom" id="Jpj-FS-Zd9"/>
                             <constraint firstItem="JK1-D2-5F7" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Nb1-bi-ud3"/>
                             <constraint firstItem="JK1-D2-5F7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ULh-pR-Daa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="X7T-Is-9js" secondAttribute="trailing" constant="6" id="UiW-JD-aTd"/>
+                            <constraint firstItem="arX-yu-Unn" firstAttribute="baseline" secondItem="N9t-VJ-CAY" secondAttribute="baseline" id="Ul3-cw-20X"/>
                             <constraint firstAttribute="trailing" secondItem="JK1-D2-5F7" secondAttribute="trailing" id="XBE-88-81q"/>
                             <constraint firstAttribute="trailing" secondItem="GFV-Mf-5bf" secondAttribute="trailing" constant="15" id="pAg-dj-mVb"/>
+                            <constraint firstItem="N9t-VJ-CAY" firstAttribute="top" secondItem="GFV-Mf-5bf" secondAttribute="bottom" constant="29" id="u4n-PA-4cf"/>
+                            <constraint firstItem="N9t-VJ-CAY" firstAttribute="leading" secondItem="arX-yu-Unn" secondAttribute="trailing" constant="7" id="vHN-2c-WfY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Single View" id="6of-dD-zPZ">
+                    <navigationItem key="navigationItem" title="临摹模式" id="6of-dD-zPZ">
                         <barButtonItem key="rightBarButtonItem" image="more" id="KqJ-DL-lvb">
                             <connections>
                                 <action selector="moreAction:" destination="vXZ-lx-hvc" id="twt-wX-F2z"/>
@@ -494,6 +505,7 @@
                         <outlet property="colorSampleView" destination="4Rz-xR-sMg" id="dau-U0-bit"/>
                         <outlet property="gl" destination="go5-Cs-Qn4" id="N3Y-pb-HQK"/>
                         <outlet property="greenSlider" destination="2bk-oc-Dro" id="27g-0x-sYZ"/>
+                        <outlet property="modelImage" destination="pcw-7M-Bbe" id="o7B-0R-pgu"/>
                         <outlet property="redSlider" destination="Mq4-X7-Qui" id="QxW-eN-7Kj"/>
                         <outlet property="redoButton" destination="N9t-VJ-CAY" id="ZQz-S4-Ul8"/>
                         <outlet property="rl" destination="UNS-xD-riD" id="gAd-7W-nJO"/>

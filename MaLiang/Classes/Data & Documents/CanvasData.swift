@@ -29,7 +29,7 @@ public struct ClearAction: CanvasElement {
 
 /// content data on canvas
 open class CanvasData {
-    
+    open var img:String = ""
     /// elements array before an clear action, avoid to change this value when drawing
     open var clearedElements: [[CanvasElement]] = []
     

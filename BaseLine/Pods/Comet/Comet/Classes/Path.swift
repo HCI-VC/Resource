@@ -2,7 +2,6 @@
 //  Path.swift
 //  Comet
 //
-//  Created by Harley.xk on 16/6/27.
 //
 //
 
