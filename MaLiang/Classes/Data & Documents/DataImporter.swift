@@ -76,7 +76,7 @@ open class DataImporter {
         content.chartlets.forEach { $0.canvas = canvas }
         canvas.data.elements = (content.lineStrips + content.chartlets).sorted(by: { $0.index < $1.index})
         reportProgress(1, on: progress)
-
+        
         DispatchQueue.main.async {
             /// redraw must be call on main thread
             canvas.redraw()

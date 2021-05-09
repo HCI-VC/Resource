@@ -1,9 +1,7 @@
 //
 //  ViewController.swift
 //  MaLiang
-//
-//  Created by Harley-xk on 04/07/2019.
-//  Copyright (c) 2019 Harley-xk. All rights reserved.
+///绘图板视图
 //
 
 import UIKit
@@ -19,16 +17,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var sizeSlider: UISlider!
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
-    @IBOutlet weak var backgroundSwitchButton: UIButton!
-    @IBOutlet weak var backgroundView: UIImageView!
-    
+
     @IBOutlet weak var canvas: Canvas!
-    
+
+    @IBOutlet weak var modelImage: UIImageView!
     var filePath: String?
     
-    var brushes: [Brush] = []
+    var brushes: [Brush] = [] //数组
     var chartlets: [MLTexture] = []
-    
+    var img:[String]=[]
+    var img_tex: [MLTexture] = []
+    private var imageCache: ChartletImageCache!
     var color: UIColor {
         return UIColor(red: r, green: g, blue: b, alpha: 1)
     }
@@ -38,23 +37,50 @@ class ViewController: UIViewController {
         return try canvas.registerBrush(name: imageName, textureID: texture.id)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden=true
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden=false
+        imageCache = ChartletImageCache(textures: chartlets)
+       
+        
+        self.navigationController?.isNavigationBarHidden=false  //打开顶部菜单栏
         // Do any additional setup after loading the view, typically from a nib.
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        chartlets = ["chartlet-1", "chartlet-2", "chartlet-3"].compactMap({ (name) -> MLTexture? in
+        img = ["chartlet-1", "chartlet-2", "chartlet-3"]
+        img_tex=img.compactMap(
+            { (name) -> MLTexture? in  //输入为name，输出为MLTexture类型
             return try? canvas.makeTexture(with: UIImage(named: name)!.pngData()!)
-        })
+            }
+        )
+        chartlets = ["chartlet-1", "chartlet-2", "chartlet-3"].compactMap(
+            { (name) -> MLTexture? in  //输入为name，输出为MLTexture类型
+            return try? canvas.makeTexture(with: UIImage(named: name)!.pngData()!)
+            }//compactMap对每一个元素适用括号内函数变换
+        )
+
+      //  picCollection.reloadData()
         canvas.backgroundColor = .clear
         canvas.data.addObserver(self)
+        
+        
+        modelImage.translatesAutoresizingMaskIntoConstraints=false;
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        modelImage.addGestureRecognizer(pan)
+        
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
+        modelImage.addGestureRecognizer(pinch)
+        let tap   = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        modelImage.addGestureRecognizer(tap)
+        modelImage.snp.makeConstraints {
+            $0.centerX.equalTo(self.view.center.x)
+            $0.centerY.equalTo(self.view.center.x)
+            $0.size.equalTo(200)
+        }
+        
         registerBrushes()
         readDataIfNeeds()
+        
     }
     
     func registerBrushes() {
@@ -138,16 +164,17 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func switchBackground(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        backgroundView.isHidden = !sender.isSelected
-    }
-    
+//    @IBAction func switchBackground(_ sender: UIButton) {
+//        sender.isSelected.toggle()
+//        backgroundView.isHidden = !sender.isSelected
+//    }//没有这个按钮，这个触发函数也没用
+//
     @IBAction func changeSizeAction(_ sender: UISlider) {
         let size = Int(sender.value)
         canvas.currentBrush.pointSize = CGFloat(size)
         strokeSizeLabel.text = "\(size)"
     }
+    
     
     @IBAction func styleChanged(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
@@ -158,9 +185,9 @@ class ViewController: UIViewController {
         sizeSlider.value = Float(brush.pointSize)
     }
     
-    @IBAction func togglePencilMode(_ sender: UISwitch) {
-        canvas.isPencilMode = sender.isOn
-    }
+    private func togglePencilMode() {
+        canvas.isPencilMode = !canvas.isPencilMode
+    }  //这东西被我删了  没用！
     
     @IBAction func undoAction(_ sender: Any) {
         canvas.undo()
@@ -190,10 +217,67 @@ class ViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
+    private var currentScale: CGFloat = 1
+    var panOffset = CGPoint.zero
+    @objc private func handlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
+        let scale = currentScale * gesture.scale * gesture.scale
+        if gesture.state == .ended {
+            scaleContent(to: scale)
+            currentScale = scale
+        }
+        if gesture.state == .changed {
+            scaleContent(to: scale)
+        }
+    }//缩放手势
+    
+    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        let location = gesture.location(in: canvas)
+        
+//        if gesture.state == .began {
+//            canvas.isMultipleTouchEnabled=false;
+//        }
+        if gesture.state == .changed {
+            moveContent(to: location)
+        }
+    }  //平移手势
+    
+    @objc private func handleTapGesture(_ gesture: UITapGestureRecognizer){
+        self.canvas.isMultipleTouchEnabled=false;
+        picPicAction(cq:true)
+    }
+    private func scaleContent(to scale: CGFloat) {
+        let scale = scale.valueBetween(min: 0.2, max: 5)
+        let newSize = modelImage.image!.size * scale
+        modelImage.snp.updateConstraints {
+            $0.width.equalTo(newSize.width)
+            $0.height.equalTo(newSize.height)
+        }
+    }
+    
+    private func moveContent(to location: CGPoint) {
+        modelImage.snp.updateConstraints {
+            $0.centerX.equalTo(location.x)
+            $0.centerY.equalTo(location.y)
+        }
+    }
+    
     func addChartletAction() {
         ChartletPicker.present(from: self, textures: chartlets) { [unowned self] (texture) in
             self.showEditor(for: texture)
         }
+    }
+    
+    func picPicAction(cq:Bool){
+        PicPicker.present(from: self, textures: img_tex,canQ: cq) { [unowned self] (index) in
+            self.setModelImage(img:self.img[index])
+        }
+    }
+    
+    func setModelImage(img:String){
+        canvas.defaultImg=img
+        modelImage.image=UIImage.init(named : img)!
+    }
+    func show(for texture: MLTexture)   {
     }
     
     func showEditor(for texture: MLTexture) {
@@ -223,7 +307,7 @@ class ViewController: UIViewController {
                 alert.addAction(title: "完成", style: .cancel)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                let filename = "\(Date().string(format: "yyyyMMddHHmmss")).lmz"
+                let filename = "\(Date().string(format: "yyyyMMddHHmmss")+"_"+self.canvas.defaultImg).lmz"
                 
                 let contents = try! FileManager.default.contentsOfDirectory(at: path.url, includingPropertiesForKeys: [], options: .init(rawValue: 0))
                 try? Zip.zipFiles(paths: contents, zipFilePath: Path.documents().resource(filename).url, password: nil, progress: nil)
@@ -235,6 +319,7 @@ class ViewController: UIViewController {
     
     func readDataIfNeeds() {
         guard let file = filePath else {
+            picPicAction(cq:false)
             return
         }
         chrysan.showMessage("读取中...")
@@ -266,9 +351,14 @@ class ViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 self.chrysan.show(.succeed, message: "读取成功!", hideDelay: 1)
+                let str = path.url.lastPathComponent.substring(from: 15)
+                self.canvas.defaultImg=str.substring(to: (str.count-4))
+                print("path:",self.canvas.defaultImg)
+                self.setModelImage(img:self.canvas.defaultImg)
             }
             
         }
+        
     }
     
     // MARK: - color
@@ -303,6 +393,12 @@ class ViewController: UIViewController {
         colorSampleView.backgroundColor = color
         canvas.currentBrush.color = color
     }
+    
+    
+    
+
+    
+    
 }
 
 extension ViewController: DataObserver {
@@ -339,5 +435,39 @@ extension String {
         let db = Double(self) ?? 0
         return CGFloat(db)
     }
+    func substring(from index:Int)->String{
+        guard let start_index=validStartIndex(original:index) else{
+            return self
+        }
+        return String(self[start_index..<endIndex])
+    }
+    func substring(to index:Int)->String{
+        guard let end_index=validStartIndex(original:index) else{
+            return self
+        }
+        return String(self[startIndex..<end_index])
+    }
+    
+    private func validStartIndex(original:Int)->String.Index?{
+        guard original<=endIndex.encodedOffset else{return nil}
+        return validIndex(original:original)
+    }
+    private func validIndex(original:Int)->String.Index{
+        switch original {
+        case ...startIndex.encodedOffset:return startIndex
+        case endIndex.encodedOffset...:return endIndex
+            
+        default:return index(startIndex,offsetBy: original)
+        }
+    }
 }
 
+
+
+
+
+
+class PicItemCell: UICollectionViewCell {
+    
+    @IBOutlet weak var pic: UIImageView!
+}

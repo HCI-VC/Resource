@@ -2,7 +2,6 @@
 //  Canvas.swift
 //  MaLiang
 //
-//  Created by Harley.xk on 2018/4/11.
 //
 
 import UIKit
@@ -13,7 +12,7 @@ open class Canvas: MetalView {
     
     /// default round point brush, will not show in registeredBrushes
     open var defaultBrush: Brush!
-    
+    open var defaultImg:String=""
     /// printer to print image textures on canvas
     open private(set) var printer: Printer!
     
@@ -218,7 +217,9 @@ open class Canvas: MetalView {
         }
         data.observers.data(oldData, didResetTo: newData)
     }
-    
+    open func setimg(){
+        data.img=self.defaultImg;
+    }
     public func undo() {
         if let data = data, data.undo() {
             redraw()

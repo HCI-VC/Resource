@@ -28,6 +28,8 @@
 		C3F3749722729A2E00F34376 /* TextureElementSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3749622729A2E00F34376 /* TextureElementSamples.swift */; };
 		CE1B9F39264155800002A65D /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1B9F38264155800002A65D /* SideMenu.framework */; };
 		CE1B9F3A264155800002A65D /* SideMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE1B9F38264155800002A65D /* SideMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE4AFE302646879A0032349C /* PicPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4AFE2F2646879A0032349C /* PicPicker.storyboard */; };
+		CE6FF40A2647A35A007B8EC7 /* PicPickeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6FF4092647A35A007B8EC7 /* PicPickeViewController.swift */; };
 		CE815D42263ED27700E604C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C39C35BE2259FD7A00DA0519 /* Main.storyboard */; };
 		CE815D47263FDCCD00E604C0 /* Pods_MaLiang_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17636DA7E81A7C670D9DA927 /* Pods_MaLiang_Example.framework */; };
 /* End PBXBuildFile section */
@@ -48,7 +50,7 @@
 
 /* Begin PBXFileReference section */
 		17636DA7E81A7C670D9DA927 /* Pods_MaLiang_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaLiang_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACD01AFB9204008FA782 /* 水墨.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "水墨.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* 群青.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "群青.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,8 @@
 		C847720412563A4B8BD1C035 /* Pods_MaLiang_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaLiang_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1B9F2B26413BB40002A65D /* MaLiang.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = MaLiang.podspec; path = ../MaLiang.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CE1B9F38264155800002A65D /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4AFE2F2646879A0032349C /* PicPicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PicPicker.storyboard; sourceTree = "<group>"; };
+		CE6FF4092647A35A007B8EC7 /* PicPickeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicPickeViewController.swift; sourceTree = "<group>"; };
 		CEC1D82F264132DF00D91920 /* MaLiang */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MaLiang; sourceTree = "<group>"; };
 		D76EE9D69205D147C25FBFCA /* Pods-MaLiang_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaLiang_Example.debug.xcconfig"; path = "Target Support Files/Pods-MaLiang_Example/Pods-MaLiang_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F856FEC335048D43A107FD49 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -122,7 +126,7 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* 水墨.app */,
+				607FACD01AFB9204008FA782 /* 群青.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +144,7 @@
 				C3617DAC2272CDBB00E5DC7C /* File Samples */,
 				C3617DBF22733EFB00E5DC7C /* Components */,
 				C3617DAD2272EA8E00E5DC7C /* Textures */,
+				CE4AFE31264687DC0032349C /* PicPicker */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for MaLiang";
@@ -225,6 +230,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		CE4AFE31264687DC0032349C /* PicPicker */ = {
+			isa = PBXGroup;
+			children = (
+				CE4AFE2F2646879A0032349C /* PicPicker.storyboard */,
+				CE6FF4092647A35A007B8EC7 /* PicPickeViewController.swift */,
+			);
+			path = PicPicker;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -245,7 +259,7 @@
 			);
 			name = MaLiang_Example;
 			productName = MaLiang;
-			productReference = 607FACD01AFB9204008FA782 /* 水墨.app */;
+			productReference = 607FACD01AFB9204008FA782 /* 群青.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -289,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3617DB92272EC5D00E5DC7C /* pencil.png in Resources */,
+				CE4AFE302646879A0032349C /* PicPicker.storyboard in Resources */,
 				C3617DB72272EB2400E5DC7C /* brush.png in Resources */,
 				C35E4454227E887B005C612D /* claw.png in Resources */,
 				CE815D42263ED27700E604C0 /* Main.storyboard in Resources */,
@@ -362,6 +377,7 @@
 				C3617DC42273FFDB00E5DC7C /* ChartletEditor.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				CE6FF40A2647A35A007B8EC7 /* PicPickeViewController.swift in Sources */,
 				C30B2D35226F06B400E3429A /* SavedFilesViewController.swift in Sources */,
 				C3D0644A22685FCF00DD6632 /* ScrollingViewController.swift in Sources */,
 				C3617DC6227407FC00E5DC7C /* ChartletImageCache.swift in Sources */,
@@ -508,7 +524,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "-1047666945";
-				PRODUCT_NAME = "水墨";
+				PRODUCT_NAME = "群青";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -528,7 +544,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "-1047666945";
-				PRODUCT_NAME = "水墨";
+				PRODUCT_NAME = "群青";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;

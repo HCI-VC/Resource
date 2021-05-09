@@ -11,7 +11,7 @@
         <!--Chartlet Picker-->
         <scene sceneID="FlM-3g-oKQ">
             <objects>
-                <viewController id="y44-dU-nDf" customClass="ChartletPicker" customModule="水墨" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="y44-dU-nDf" customClass="ChartletPicker" customModule="群青" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X3f-wl-QbS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,7 +33,7 @@
                                     <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChartletPickerItemCell" id="wv3-kE-qnM" customClass="ChartletPickerItemCell" customModule="水墨" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChartletPickerItemCell" id="wv3-kE-qnM" customClass="ChartletPickerItemCell" customModule="群青" customModuleProvider="target">
                                         <rect key="frame" x="15" y="0.0" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -93,7 +93,7 @@
         <!--Chartlet Editor-->
         <scene sceneID="gOC-Kt-8wH">
             <objects>
-                <viewController storyboardIdentifier="ChartletEditor" id="rl2-1D-bMY" customClass="ChartletEditor" customModule="水墨" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChartletEditor" id="rl2-1D-bMY" customClass="ChartletEditor" customModule="群青" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7S8-I9-Lbj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
