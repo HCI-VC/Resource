@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Chrysan
 public extension UIStoryboard {
     
     /// 获取 Main Storyboard
@@ -38,6 +38,12 @@ extension UIViewController {
 
 class RootViewController: UITableViewController {
 
+    @IBOutlet weak var ModeT: UIButton!
+    @IBAction func ModeTTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "还没做", message: "敬请期待", preferredStyle: .alert)
+        alert.addAction(title: "OK", style: .cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,7 +57,7 @@ class RootViewController: UITableViewController {
         self.navigationController?.isNavigationBarHidden=true
     }
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden=false
+        self.navigationController?.isNavigationBarHidden=true
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

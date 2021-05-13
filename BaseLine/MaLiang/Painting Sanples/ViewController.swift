@@ -10,10 +10,12 @@ import Comet
 import Chrysan
 import Zip
 
-class ViewController: UIViewController {
+
+class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var strokeSizeLabel: UILabel!
     @IBOutlet weak var brushSegement: UISegmentedControl!
+    @IBOutlet weak var Font: UILabel!
     @IBOutlet weak var sizeSlider: UISlider!
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
@@ -21,8 +23,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var canvas: Canvas!
 
     @IBOutlet weak var modelImage: UIImageView!
+    @IBOutlet weak var ColorPicker: UIButton!
+
+    @IBOutlet weak var toolBarBack: UILabel!
+    @IBOutlet weak var ColorPannel: UICollectionView!
     var filePath: String?
+    @IBOutlet weak var AddTex: UIButton!
+    @IBOutlet weak var Confirm: UIButton!
+    @IBOutlet weak var Store: UIButton!
     
+    @IBOutlet weak var Help: UIButton!
+    @IBOutlet weak var HideUI: UIButton!
+    @IBOutlet weak var Quit: UIButton!
+    @IBOutlet weak var helpDoc: UIView!
+    @IBOutlet weak var RGBPannel: UIView!
     var brushes: [Brush] = [] //数组
     var chartlets: [MLTexture] = []
     var img:[String]=[]
@@ -32,18 +46,99 @@ class ViewController: UIViewController {
         return UIColor(red: r, green: g, blue: b, alpha: 1)
     }
     
+    private var needSave=false;
+    private var shouldSave=false;
+  //  var colorP:ColorPicker!
     private func registerBrush(with imageName: String) throws -> Brush {
         let texture = try canvas.makeTexture(with: UIImage(named: imageName)!.pngData()!)
         return try canvas.registerBrush(name: imageName, textureID: texture.id)
     }
     
+    @objc private func ADDTEX_tapped(){
+        self.addChartletAction()
+    }
+    @objc private func CONFIRM_tapped(){
+        
+    }
+    @objc  private func STORE_tapped(){
+        self.needSave=false;
+        self.saveData()
+    }
+    @objc private func HELP_tapped(){
+        if self.helpDoc.isHidden {
+            self.helpDoc.isHidden=false
+        }else{
+            self.helpDoc.isHidden=true
+        }
+    }
+    @objc private func HIDE_tapped(){
+        
+        ColorPicker.isHidden = !ColorPicker.isHidden
+        Font.isHidden = !Font.isHidden
+        sizeSlider.isHidden = !sizeSlider.isHidden
+        strokeSizeLabel.isHidden = !strokeSizeLabel.isHidden
+        brushSegement.isHidden = !brushSegement.isHidden
+        toolBarBack.isHidden = !toolBarBack.isHidden
+        ColorPannel.isHidden = true
+        let endTransform = view.bounds.width - RGBPannel.frame.origin.x + 20
+    
+        UIView.animate(withDuration: 0.2, animations: {
+            self.RGBPannel.transform = CGAffineTransform(translationX: endTransform, y: 0)
+            
+        }, completion: nil)
+        
+       
+        
+        
+    }
+    @objc private func QUIT_tapped(){
+        
+        if self.needSave{
+            let alert=UIAlertController(title: "提示", message: "项目还未保存，是否暂存", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "保存", style: .default, handler: {
+                action in
+                alert.dismiss(animated: true, completion: nil)
+                self.saveData()
+                self.needSave=false
+            }))
+            alert.addAction(UIAlertAction(title: "不保存", style: .destructive, handler: {
+                action in
+                alert.dismiss(animated: true, completion: nil)
+                self.navigationController?.popToRootViewController(animated: true)
+                
+            }))
+            self.present(alert, animated: true, completion:nil)
+        }
+        
+        else{
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+       
+    }
+    
+    private func BindButton(){
+        
+        helpDoc.isHidden=true
+        
+        self.AddTex.addTarget(self, action: #selector(ADDTEX_tapped), for: .touchUpInside)
+        self.Confirm.addTarget(self, action: #selector(CONFIRM_tapped), for: .touchUpInside)
+        self.Store.addTarget(self, action: #selector(STORE_tapped), for: .touchUpInside)
+        self.Help.addTarget(self, action: #selector(HELP_tapped), for: .touchUpInside)
+        self.HideUI.addTarget(self, action: #selector(HIDE_tapped), for: .touchUpInside)
+        self.Quit.addTarget(self, action: #selector(QUIT_tapped), for: .touchUpInside)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        modelImage.borderWidth=0;
 
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imageCache = ChartletImageCache(textures: chartlets)
        
         
-        self.navigationController?.isNavigationBarHidden=false  //打开顶部菜单栏
+        self.navigationController?.isNavigationBarHidden=true  //关闭顶部菜单栏
         // Do any additional setup after loading the view, typically from a nib.
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -62,7 +157,8 @@ class ViewController: UIViewController {
       //  picCollection.reloadData()
         canvas.backgroundColor = .clear
         canvas.data.addObserver(self)
-        
+        ColorPannel.isHidden=true
+        helpDoc.isHidden=false
         
         modelImage.translatesAutoresizingMaskIntoConstraints=false;
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
@@ -78,9 +174,15 @@ class ViewController: UIViewController {
             $0.size.equalTo(200)
         }
         
+        
+        ColorPannel.dataSource=self;
+        ColorPannel.delegate=self;
+        ColorPicker.addTarget(self, action: #selector(CPtapped), for: .touchUpInside)
+        
+        self.BindButton()
         registerBrushes()
         readDataIfNeeds()
-        
+//        modelImage.borderWidth=3
     }
     
     func registerBrushes() {
@@ -201,6 +303,8 @@ class ViewController: UIViewController {
         canvas.clear()
     }
     
+    
+    
     @IBAction func moreAction(_ sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "选项", message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(title: "贴图", style: .default) { [unowned self] (_) in
@@ -229,6 +333,14 @@ class ViewController: UIViewController {
             scaleContent(to: scale)
         }
     }//缩放手势
+    
+    @objc func CPtapped(sender: UIButton){
+        if ColorPannel.isHidden == true {
+            ColorPannel.isHidden=false;
+        }else {
+            ColorPannel.isHidden=true;
+        }
+    }
     
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let location = gesture.location(in: canvas)
@@ -270,6 +382,7 @@ class ViewController: UIViewController {
     func picPicAction(cq:Bool){
         PicPicker.present(from: self, textures: img_tex,canQ: cq) { [unowned self] (index) in
             self.setModelImage(img:self.img[index])
+            self.modelImage.borderWidth=2
         }
     }
     
@@ -355,6 +468,7 @@ class ViewController: UIViewController {
                 self.canvas.defaultImg=str.substring(to: (str.count-4))
                 print("path:",self.canvas.defaultImg)
                 self.setModelImage(img:self.canvas.defaultImg)
+                self.modelImage.borderWidth=2
             }
             
         }
@@ -394,39 +508,82 @@ class ViewController: UIViewController {
         canvas.currentBrush.color = color
     }
     
+    var index:IndexPath = []
     
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return  colors.count
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print(indexPath.item)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PicCoCell", for: indexPath) as! PicCoCell
+        cell.color.backgroundColor=UIColor(red:(CGFloat)(colors[indexPath.item].R)/255.0,green:(CGFloat)(colors[indexPath.item].G)/255.0,blue:(CGFloat)(colors[indexPath.item].B)/255.0,alpha: 1.0);
+        cell.name.text=colors[indexPath.item].name
+        return  cell
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell=ColorPannel.cellForItem(at: indexPath)
+        cell?.borderColor=UIColor(red:0,green:1.0,blue:0,alpha: 1.0)
+        if !index.isEmpty && index != indexPath {
+            let cell2=ColorPannel.cellForItem(at: index)
+            cell2?.borderColor=UIColor(red:1.0,green: 1.0,blue: 1.0,alpha: 1.0)
+            self.index=indexPath
+        }
+        index=indexPath
+        
+        let re=(CGFloat)(colors[indexPath.item].R)/255.0
+        let gr=(CGFloat)(colors[indexPath.item].G)/255.0
+        let bl=(CGFloat)(colors[indexPath.item].B)/255.0
+        
+        colorSampleView.backgroundColor = UIColor(red: re, green: gr, blue: bl, alpha: 1.0)
+        canvas.currentBrush.color = UIColor(red: re, green: gr, blue: bl, alpha: 1.0)
+        
+        
+        
+    }
     
 
     
     
 }
 
+extension UIColor{
+    func UIColorFromRGB(R:Int,G:Int,B:Int)->UIColor{
+        return UIColor(red:CGFloat(R),green: CGFloat(G),blue: CGFloat(B),alpha: CGFloat(1));
+    }
+}
+
 extension ViewController: DataObserver {
     /// called when a line strip is begin
     func lineStrip(_ strip: LineStrip, didBeginOn data: CanvasData) {
         self.redoButton.isEnabled = false
+        self.needSave=true
     }
     
     /// called when a element is finished
     func element(_ element: CanvasElement, didFinishOn data: CanvasData) {
         self.undoButton.isEnabled = true
+        self.needSave=true
     }
     
     /// callen when clear the canvas
     func dataDidClear(_ data: CanvasData) {
-        
+        self.needSave=true
     }
     
     /// callen when undo
     func dataDidUndo(_ data: CanvasData) {
         self.undoButton.isEnabled = true
         self.redoButton.isEnabled = data.canRedo
+        self.needSave=true
     }
     
     /// callen when redo
     func dataDidRedo(_ data: CanvasData) {
         self.undoButton.isEnabled = true
         self.redoButton.isEnabled = data.canRedo
+        self.needSave=true
     }
 }
 
@@ -467,7 +624,54 @@ extension String {
 
 
 
-class PicItemCell: UICollectionViewCell {
+class PicCoCell: UICollectionViewCell {
     
-    @IBOutlet weak var pic: UIImageView!
+    @IBOutlet weak var color: UILabel!
+    @IBOutlet weak var name: UILabel!
 }
+
+struct color {
+    var R:Int;
+    var G:Int;
+    var B:Int;
+    var name:String;
+}
+var colors:[color]=[
+    color(R:0,G:0,B:0,name:"黑色"),
+    color(R:31,G:36,B:33,name:"象牙黑色"),
+    color(R:192,G:192,B:192,name:"灰色"),
+    color(R:112,G:128,B:105,name:"石板灰色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:252,G:230,B:201,name:"蛋壳色"),
+    color(R:176,G:23,B:31,name:"印度红色"),
+    color(R:135,G:38,B:87,name:"草莓色"),
+    color(R:255,G:192,B:203,name:"粉色"),
+    color(R:255,G:97,B:0,name:"橙色"),
+    color(R:227,G:168,B:105,name:"瓜色"),
+    color(R:255,G:125,B:64,name:"肉色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    
+    
+    
+]
