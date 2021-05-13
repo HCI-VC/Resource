@@ -8,7 +8,7 @@
 
 import UIKit
 import Comet
-import SideMenu
+//import SideMenu
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
