@@ -20,6 +20,7 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
 
+    @IBOutlet weak var CanvasView: UIView!
     @IBOutlet weak var canvas: Canvas!
 
     @IBOutlet weak var modelImage: UIImageView!
@@ -141,7 +142,7 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
         self.navigationController?.isNavigationBarHidden=true  //关闭顶部菜单栏
         // Do any additional setup after loading the view, typically from a nib.
         
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         img = ["chartlet-1", "chartlet-2", "chartlet-3"]
         img_tex=img.compactMap(
             { (name) -> MLTexture? in  //输入为name，输出为MLTexture类型
@@ -154,9 +155,28 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
             }//compactMap对每一个元素适用括号内函数变换
         )
 
+        
       //  picCollection.reloadData()
-        canvas.backgroundColor = .clear
+//        canvas.backgroundColor = UIColor(displayP3Red:(CGFloat)(0.01), green: 1.0, blue: 1.0, alpha: 1.0)
         canvas.data.addObserver(self)
+        
+        
+        /*
+            设置画板在屏幕中央
+         */
+        CanvasView.frame.size=CGSize(width: 800, height: 600)
+        CanvasView.center=CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        print("C",CanvasView.center)
+        canvas.frame.size=CGSize(width: 800, height: 600)
+        
+        canvas.center=CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        print("c",canvas.center)
+        /*
+            设置画板大小
+         */
+        
+        
+        
         ColorPannel.isHidden=true
         helpDoc.isHidden=false
         
@@ -173,7 +193,6 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
             $0.centerY.equalTo(self.view.center.x)
             $0.size.equalTo(200)
         }
-        
         
         ColorPannel.dataSource=self;
         ColorPannel.delegate=self;
@@ -358,7 +377,7 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
         picPicAction(cq:true)
     }
     private func scaleContent(to scale: CGFloat) {
-        let scale = scale.valueBetween(min: 0.2, max: 5)
+        let scale = scale.valueBetween(min: 0.8, max: 5)
         let newSize = modelImage.image!.size * scale
         modelImage.snp.updateConstraints {
             $0.width.equalTo(newSize.width)
@@ -388,7 +407,12 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     
     func setModelImage(img:String){
         canvas.defaultImg=img
-        modelImage.image=UIImage.init(named : img)!
+//        modelImage.image=UIImage.init(named : img)!
+        
+        modelImage.image=canvas.snapshot()
+        print(canvas.snapshot()?.size)
+        
+//        let img=getImage(size: CGSize(width: 500, height: 500), currentView: CanvasView)
     }
     func show(for texture: MLTexture)   {
     }
@@ -399,7 +423,14 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
             self.canvas.renderChartlet(at: result.center, size: result.size, textureID: texture.id, rotation: result.angle)
         }
     }
-    
+    func getImage(size:CGSize , currentView:UIView) -> UIImage {
+            UIGraphicsBeginImageContextWithOptions( size, true, 1.0)
+            currentView.layer.render(in: UIGraphicsGetCurrentContext()!)
+            let image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            return image!;
+        }
+
     func snapshotAction(_ sender: Any) {
         let preview = PaintingPreview.create(from: .main)
         preview.image = canvas.snapshot()
@@ -515,7 +546,6 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(indexPath.item)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PicCoCell", for: indexPath) as! PicCoCell
         cell.color.backgroundColor=UIColor(red:(CGFloat)(colors[indexPath.item].R)/255.0,green:(CGFloat)(colors[indexPath.item].G)/255.0,blue:(CGFloat)(colors[indexPath.item].B)/255.0,alpha: 1.0);
         cell.name.text=colors[indexPath.item].name
@@ -622,6 +652,19 @@ extension String {
 
 
 
+extension UIView{
+    func asImage()->UIImage{
+        let format = UIGraphicsImageRendererFormat()
+                format.prefersExtendedRange = true
+                let renderer = UIGraphicsImageRenderer.init(bounds: bounds, format: format)
+        let image = renderer.image {
+                    context in
+//                    context.cgContext.concatenate(CGAffineTransform.identity.scaledBy(x: 1, y: 1))
+                    return layer.render(in: context.cgContext)
+                }
+        return image
+    }
+}
 
 
 class PicCoCell: UICollectionViewCell {
@@ -671,6 +714,24 @@ var colors:[color]=[
     color(R:250,G:235,B:215,name:"古董白色"),
     color(R:250,G:235,B:215,name:"古董白色"),
     color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:31,G:36,B:33,name:"象牙黑色"),
+    color(R:192,G:192,B:192,name:"灰色"),
+    color(R:112,G:128,B:105,name:"石板灰色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:252,G:230,B:201,name:"蛋壳色"),
+    color(R:176,G:23,B:31,name:"印度红色"),
+    color(R:135,G:38,B:87,name:"草莓色"),
+    color(R:255,G:192,B:203,name:"粉色"),
+    color(R:255,G:97,B:0,name:"橙色"),
+    color(R:31,G:36,B:33,name:"象牙黑色"),
+    color(R:192,G:192,B:192,name:"灰色"),
+    color(R:112,G:128,B:105,name:"石板灰色"),
+    color(R:250,G:235,B:215,name:"古董白色"),
+    color(R:252,G:230,B:201,name:"蛋壳色"),
+    color(R:176,G:23,B:31,name:"印度红色"),
+    color(R:135,G:38,B:87,name:"草莓色"),
+    color(R:255,G:192,B:203,name:"粉色"),
+    color(R:255,G:97,B:0,name:"橙色"),
     
     
     
