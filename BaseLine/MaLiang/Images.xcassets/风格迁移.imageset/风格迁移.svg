@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;fill:none;stroke:#FF0000;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000000;stroke-width:80;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g id="图层_2" class="st0">
+	<rect y="144.5" class="st1" width="1024" height="738"/>
+	<rect x="77.5" y="77.5" class="st1" width="869" height="869"/>
+	<rect x="143.5" y="-0.5" class="st1" width="739" height="1024"/>
+	<circle class="st1" cx="512" cy="512" r="512"/>
+</g>
+<g id="图层_3">
+	<g>
+		<path class="st2" d="M427.9,706.9l-0.3,71.8c-0.1,26.8,29.6,42.9,52,28.3l397-259.1c20-13,20.4-42.2,0.8-55.8l-395-274.7
+			c-22.3-15.5-52.8,0.4-52.9,27.5l-0.3,72.3"/>
+		<path class="st2" d="M134.1,254.3l-2,523.9c-0.1,26.3,29.1,42.1,51.1,27.8l389.6-254.3c19.6-12.8,20-41.4,0.8-54.8L186,227.3
+			C164.1,212.1,134.2,227.7,134.1,254.3z"/>
+	</g>
+</g>
+</svg>

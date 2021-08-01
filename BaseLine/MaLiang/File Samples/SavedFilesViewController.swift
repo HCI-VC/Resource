@@ -52,14 +52,30 @@ extension SavedFilesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileListCell", for: indexPath)
         let fileInfo = files[indexPath.row]
-        cell.textLabel?.text = fileInfo.url.lastPathComponent
+        cell.textLabel?.text = "\(fileInfo.url.lastPathComponent.split(separator: "_")[1])"
+        print(fileInfo.url.lastPathComponent.split(separator: "_")[1])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ViewController.createFromStoryboard()
-        vc.filePath = files[indexPath.row].string
-        navigationController?.push(vc)
+        
+        if files[indexPath.row].url.lastPathComponent[files[indexPath.row].url.lastPathComponent.startIndex]=="1"{
+            let vc = ViewController.createFromStoryboard()
+            vc.filePath = files[indexPath.row].string
+            navigationController?.push(vc)
+        }
+        if files[indexPath.row].url.lastPathComponent[files[indexPath.row].url.lastPathComponent.startIndex]=="2"{
+            let vc = TransViewController.createFromStoryboard()
+            vc.filePath = files[indexPath.row].string
+            navigationController?.push(vc)
+        }
+        if files[indexPath.row].url.lastPathComponent[files[indexPath.row].url.lastPathComponent.startIndex]=="3"{
+            let vc = FreeViewController.createFromStoryboard()
+            vc.filePath = files[indexPath.row].string
+            navigationController?.push(vc)
+        }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {

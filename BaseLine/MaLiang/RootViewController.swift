@@ -39,11 +39,11 @@ extension UIViewController {
 class RootViewController: UITableViewController {
 
     @IBOutlet weak var ModeT: UIButton!
-    @IBAction func ModeTTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: "还没做", message: "敬请期待", preferredStyle: .alert)
-        alert.addAction(title: "OK", style: .cancel)
-        self.present(alert, animated: true, completion: nil)
-    }
+//    @IBAction func ModeTTapped(_ sender: UIButton) {
+//        let alert = UIAlertController(title: "还没做", message: "敬请期待", preferredStyle: .alert)
+//        alert.addAction(title: "OK", style: .cancel)
+//        self.present(alert, animated: true, completion: nil)
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

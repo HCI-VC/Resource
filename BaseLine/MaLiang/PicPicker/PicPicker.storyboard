@@ -75,6 +75,7 @@
                     <connections>
                         <outlet property="backgroundView" destination="jVH-t5-68D" id="NAj-nK-XVH"/>
                         <outlet property="collectionView" destination="Cmo-yN-UlY" id="hwu-z4-cKu"/>
+                        <outlet property="titleLabel" destination="2mL-ma-pRX" id="5ls-uy-XdG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

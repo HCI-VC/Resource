@@ -15,11 +15,20 @@ open class PicPicker: UIViewController ,UICollectionViewDataSource, UICollection
         public static var `default` = Options()
     }
     
+    var text:String?
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet private weak var backgroundView: UIView!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     public typealias ResultHandler = (Int) -> ()
     
-    public static func present(from source: UIViewController, textures: [MLTexture], canQ:Bool ,options: Options = .default, result: ResultHandler?) {
+    public static func present(from source: UIViewController, textures: [MLTexture], canQ:Bool ,title:String?,options: Options = .default, result: ResultHandler?) {
 
         let picker = PicPicker.createInitial(from: UIStoryboard("PicPicker"))
+        if(title != nil) {
+            picker.text=title
+        }
         picker.source = source
         picker.textures = textures
         picker.options = options
@@ -38,13 +47,12 @@ open class PicPicker: UIViewController ,UICollectionViewDataSource, UICollection
     private var canQuit:Bool=false
     private var imageCache: ChartletImageCache!
     
-    @IBOutlet private weak var backgroundView: UIView!
-    @IBOutlet private weak var collectionView: UICollectionView!
+    
     
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.titleLabel.text=self.text
         if(canQuit) {
             let tap = UITapGestureRecognizer(target: self, action: #selector(cancelAction))
             backgroundView.addGestureRecognizer(tap)

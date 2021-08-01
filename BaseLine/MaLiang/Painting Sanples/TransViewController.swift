@@ -11,7 +11,7 @@ import Chrysan
 import Zip
 
 
-class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class TransViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var strokeSizeLabel: UILabel!
     @IBOutlet weak var brushSegement: UISegmentedControl!
@@ -36,17 +36,10 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     @IBOutlet weak var Help: UIButton!
     @IBOutlet weak var HideUI: UIButton!
     @IBOutlet weak var Plus: UIButton!
-    @IBOutlet weak var Trans: UIButton!
     @IBOutlet weak var Quit: UIButton!
     @IBOutlet weak var helpDoc: UIView!
     @IBOutlet weak var RGBPannel: UIView!
     @IBOutlet weak var outputImage: UIImageView!
-    @IBOutlet weak var star1: UIImageView!
-    @IBOutlet weak var star2: UIImageView!
-    @IBOutlet weak var star3: UIImageView!
-    
-    
-    
     var brushes: [Brush] = [] //数组
     var chartlets: [MLTexture] = []
     var img:[String]=[]
@@ -58,8 +51,7 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     private var ObjectName:String?
     private var OutPutFrame:UIImage?
     private var OutPutImage:UIImage?
-    private var LastLevel:String = "0"
-    private var CurrLevel:String = "0"
+    
     var color: UIColor {
         return UIColor(red: r, green: g, blue: b, alpha: 1)
     }
@@ -67,34 +59,12 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     private var needSave=false;
     private var shouldSave=false;
     private var colorMode:Bool = false;
-    private var ID:Int = 0;
+    
     
     private var FixedHeight=600;
     private var FixedWidth=800;
   
     
-    
-    private func changeStar(level:String){
-        self.star1.isHidden=true;
-        self.star2.isHidden=true;
-        self.star3.isHidden=true;
-        switch level {
-        case "3":
-            self.star3.isHidden=false
-            self.star2.isHidden=false
-            self.star1.isHidden=false
-        case "2":
-            self.star2.isHidden=false
-            self.star1.isHidden=false
-        case "1":
-            self.star1.isHidden=false
-        case "0":
-            break
-            
-        default:
-            break
-        }
-    }
     
   //  var colorP:ColorPicker!
     
@@ -140,202 +110,12 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     @objc private func ADDTEX_tapped(){
         
         //切换mode
-        self.CurrLevel="0"
-        self.LastLevel="0"
-        self.colorMode = !self.colorMode
-        self.canvas.isHidden=false
-        self.outputImage.isHidden=true
-        if self.colorMode {
-            self.AddTex.setTitle("色", for: .normal)
-            self.HideUI.isEnabled=false
-            self.Plus.isEnabled=false
-            self.chrysan.show(.succeed,message: "已切换至颜色匹配，请重新匹配",hideDelay: 1)
-            
-        }
-        else {
-            self.AddTex.setTitle("稿", for: .normal)
-            self.HideUI.isEnabled=false
-            self.Plus.isEnabled=false
-            self.chrysan.show(.succeed,message: "已切换至线稿匹配，请重新匹配",hideDelay: 1)
-            
-        }
+        self.chrysan.show(.error,message: "本模式不可获得指导操作",hideDelay: 1)
     }
     
     @objc private func CONFIRM_tapped(){
-
-//        UIImageWriteToSavedPhotosAlbum(canvas.snapshot()!, self, #selector(saveimage(image:didFinishSavingWithError:contextInfo:)), nil)
-
-//        let alertController = UIAlertController(title: "选择模式",message: nil,preferredStyle: .alert)
-//        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-//        let directMessagesAction1 = UIAlertAction(title: "线稿比对", style: .default) { (action: UIAlertAction!) -> Void in
-//
-//        }
-//        let directMessagesAction2 = UIAlertAction(title: "颜色比对", style: .default) { (action: UIAlertAction!) -> Void in
-//
-//        }
-//        alertController.addAction(directMessagesAction1)
-//        alertController.addAction(directMessagesAction2)
-//        alertController.addAction(cancelAction)
-
-//        if let popoverPresentationController = alertController.popoverPresentationController {
-//            popoverPresentationController.sourceView = self.canvas.view
-//            popoverPresentationController.sourceRect = self.canvas.view.bounds
-//        }
-//        alertController.popoverPresentationController?.sourceRect = self.headerV.nameLb.frame //箭头指向哪里
-//        self.present(alertController, animated: true, completion: nil)
-        
-        
-        
-        
-        
-        chrysan.showMessage("比对中...")
-        let session: URLSession = URLSession.shared
-        let url: NSURL = self.colorMode ? NSURL.init(string: "\(httpURL)/matchColor")! :  NSURL.init(string: "\(httpURL)/matchSkeleton")!
-//        let url: NSURL = NSURL.init(string: "http://192.168.233.158:5000/test2")!
-        var request: NSMutableURLRequest = NSMutableURLRequest.init(url: url as URL)
-
-        let pngI:String=canvas.snapshot()!.jpegData(compressionQuality: 1)!.base64EncodedString()
-        request.httpMethod = "POST"
-        request.httpBody = "img=\(pngI)&id=\(self.ID)".data(using: String.Encoding.utf8)
-        print(self.ID)
-        let task:URLSessionDataTask  = session.dataTask(with: request as URLRequest) { (data, res, error) in
-        
-        if(error == nil){
-            
-            let str:String=String(data: data!, encoding: .utf8)!
-            
-            
-            
-            
-            
-           
-            DispatchQueue.main.async {
-                print(str)
-                self.LastLevel=self.CurrLevel
-                self.OutPutImage=self.base64StringToUIImage(base64String: "\(str.split(separator: "@")[1])")
-                self.OutPutFrame=self.base64StringToUIImage(base64String: "\(str.split(separator: "@")[0])")
-                self.CurrLevel="\(str.split(separator: "@")[2])"
-                print(self.CurrLevel)
-                self.changeStar(level: self.CurrLevel)
-                self.outputImage.image=self.OutPutFrame
-                self.outputImage.isHidden=false
-                self.HideUI.isEnabled=true
-                self.Plus.isEnabled=true
-                self.chrysan.hide()
-                if(self.CurrLevel>self.LastLevel){
-                    print(self.CurrLevel,self.LastLevel)
-                    self.chrysan.show(.succeed,message: "恭喜您，有进步！" ,hideDelay:  1)
-                }
-                if(self.CurrLevel<self.LastLevel){
-                    print(self.CurrLevel,self.LastLevel)
-                    self.chrysan.show(.succeed,message: "啊,退步啦" ,hideDelay:  1)
-                }
-                if(self.CurrLevel==self.LastLevel){
-                    print(self.CurrLevel,self.LastLevel)
-                    if(self.CurrLevel=="0"){
-                        self.chrysan.show(.succeed,message: "请先着墨！" ,hideDelay:  1)
-                    }else{
-                        self.chrysan.show(.succeed,message: "发挥稳定，继续保持！" ,hideDelay:  1)
-                    }
-                    
-                }
-                
-                
-            }
-//            self.chrysan.showMessage("比对成功",hideDelay: 1)
-
-        }else{
-            DispatchQueue.main.async {
-                self.chrysan.hide()
-                self.chrysan.show(.error,message: "网络故障" ,hideDelay:  1)
-            }
-            print("error:error")
-//            self.chrysan.showMessage("网络故障!",hideDelay: 1)
-        }
-
-    }
-
-        task.resume()//开始执行
-        
-        
-        
-        
-
-        
-    }
-
-
-        
-    
-    @objc  private func STORE_tapped(){
-        self.outputImage.isHidden=true
         self.canvas.isHidden=false
-        if self.ObjectName==nil{
-            let alertController = UIAlertController(title: "输入项目名称(10字以内)", message: nil, preferredStyle: .alert)
-            alertController.addTextField(configurationHandler: { (textField: UITextField!) -> Void in
-                        textField.placeholder = "输入项目名称(10字以内)"
-                        // 添加监听代码，监听文本框变化时要做的操作
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.alertTextFieldDidChange), name: UITextField.textDidChangeNotification, object: textField)
-            })
-            alertController.addAction( UIAlertAction(title: "取消", style: .cancel, handler: { (action: UIAlertAction!) -> Void in
-            alertController.dismiss(animated: true, completion: nil)
-                }))
-            let ok = UIAlertAction(title: "确认", style: .default , handler: { (action: UIAlertAction!) -> Void in
-                self.ObjectName = alertController.textFields?.first?.text
-                alertController.dismiss(animated: true, completion: nil)
-                
-                self.saveData()
-                self.needSave=false
-                })
-            ok.isEnabled = false
-            alertController.addAction(ok)
-            self.present(alertController, animated: true, completion: nil)
-        }else{
-            self.needSave=false;
-            self.saveData()
-        }
-    }
-    @objc private func HELP_tapped(){
-        if self.helpDoc.isHidden {
-            self.helpDoc.isHidden=false
-        }else{
-            self.helpDoc.isHidden=true
-        }
-    }
-    @objc private func HIDE_tapped(){
-        
-
-        self.outputImage.isHidden = !self.outputImage.isHidden
-        if(self.OutPutFrame==nil){
-            self.outputImage.image=self.OutPutImage
-            self.canvas.isHidden = !self.outputImage.isHidden
-        }else{
-            self.outputImage.image=self.OutPutFrame
-        }
-        
-        if((!self.outputImage.isHidden) && (self.OutPutFrame != nil)){
-            self.Plus.isEnabled=true
-        }else{
-            self.Plus.isEnabled=false
-        }
-       
-
-    }
-    
-    
-    @objc func PLUS_tapped(){
-        if self.outputImage.image==self.OutPutFrame {
-            self.outputImage.image=self.OutPutImage
-        }else{
-            self.outputImage.image=self.OutPutFrame
-        }
-    }
-    
-    @objc func TRANS_tapped(){
-        
-        
         PicPicker.present(from: self, textures: style_tex,canQ: true ,title:"请选择一种风格") { [unowned self] (index) in
-            self.canvas.isHidden=false
             chrysan.showMessage("风格迁移中...")
             let session: URLSession = URLSession.shared
             let url: NSURL = NSURL.init(string: "\(httpURL)/styleTransfer")!
@@ -383,6 +163,8 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
             task.resume()//开始执行
         }
     }
+
+
     @objc func STORE_long_tapped(_ sender : UILongPressGestureRecognizer){
         print("NO")
         if(sender.state == .ended){
@@ -396,6 +178,67 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
         }
         
     }
+    
+    @objc  private func STORE_tapped(){
+        self.outputImage.isHidden=true
+        self.canvas.isHidden=false
+        if self.ObjectName==nil{
+            let alertController = UIAlertController(title: "输入项目名称(10字以内)", message: nil, preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: { (textField: UITextField!) -> Void in
+                        textField.placeholder = "输入项目名称(10字以内)"
+                        // 添加监听代码，监听文本框变化时要做的操作
+                        NotificationCenter.default.addObserver(self, selector: #selector(self.alertTextFieldDidChange), name: UITextField.textDidChangeNotification, object: textField)
+            })
+            alertController.addAction( UIAlertAction(title: "取消", style: .cancel, handler: { (action: UIAlertAction!) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+                }))
+            let ok = UIAlertAction(title: "确认", style: .default , handler: { (action: UIAlertAction!) -> Void in
+                self.ObjectName = alertController.textFields?.first?.text
+                alertController.dismiss(animated: true, completion: nil)
+                
+                self.saveData()
+                self.needSave=false
+                })
+            ok.isEnabled = false
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
+        }else{
+            self.needSave=false;
+            self.saveData()
+        }
+    }
+    @objc private func HELP_tapped(){
+        if self.helpDoc.isHidden {
+            self.helpDoc.isHidden=false
+        }else{
+            self.helpDoc.isHidden=true
+        }
+    }
+    @objc private func HIDE_tapped(){
+        
+        self.outputImage.isHidden = !self.outputImage.isHidden
+        self.canvas.isHidden = !self.outputImage.isHidden
+        self.outputImage.image=self.OutPutFrame
+        if(!self.outputImage.isHidden){
+            self.Plus.isEnabled=true
+            
+        }else{
+            self.Plus.isEnabled=false
+        }
+       
+        
+        
+    }
+    
+    
+    @objc func PLUS_tapped(){
+        if self.outputImage.image==self.OutPutFrame {
+            self.outputImage.image=self.OutPutImage
+        }else{
+            self.outputImage.image=self.OutPutFrame
+        }
+    }
+    
     @objc private func alertTextFieldDidChange(){
         let alertController = self.presentedViewController as! UIAlertController?
         if (alertController != nil) {
@@ -468,12 +311,8 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
         self.Store.addTarget(self, action: #selector(STORE_tapped), for: .touchUpInside)
         self.Help.addTarget(self, action: #selector(HELP_tapped), for: .touchUpInside)
         self.HideUI.addTarget(self, action: #selector(HIDE_tapped), for: .touchUpInside)
-        self.Trans.addTarget(self, action: #selector(TRANS_tapped), for: .touchUpInside)
         self.Quit.addTarget(self, action: #selector(QUIT_tapped), for: .touchUpInside)
         self.Plus.addTarget(self, action: #selector(PLUS_tapped), for: .touchUpInside)
-        
-        
-        
         
         
         let longPressGes = UILongPressGestureRecognizer(target: self, action: #selector(STORE_long_tapped))
@@ -488,7 +327,6 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
 
         self.Store.isUserInteractionEnabled = true
         self.Store.addGestureRecognizer(longPressGes)
-
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -505,20 +343,21 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
         // Do any additional setup after loading the view, typically from a nib.
         
          navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        img = ["1", "2","3","4","5"]
+        img = ["1","2","3","4","5"]
         img_tex=img.compactMap(
             { (name) -> MLTexture? in  //输入为name，输出为MLTexture类型
             return try? canvas.makeTexture(with: UIImage(named: name)!.pngData()!)
             }
         )
-        
         style=["boat","chinese","dusk","muse","starry_night"]
         style_tex=style.compactMap(
             { (name) -> MLTexture? in  //输入为name，输出为MLTexture类型
             return try? canvas.makeTexture(with: UIImage(named: name)!.pngData()!)
             }
         )
-    
+        
+        
+        
         chartlets = ["chartlet-1", "chartlet-2", "chartlet-3"].compactMap(
             { (name) -> MLTexture? in  //输入为name，输出为MLTexture类型
             return try? canvas.makeTexture(with: UIImage(named: name)!.pngData()!)
@@ -544,7 +383,7 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
          */
         
         
-        self.changeStar(level: self.CurrLevel)
+        
         self.HideUI.isEnabled=false
         self.Plus.isEnabled=false
         
@@ -792,8 +631,7 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     
     //选择临摹图片
     func picPicAction(cq:Bool){
-        PicPicker.present(from: self, textures: img_tex,canQ: cq ,title:"请选择图片") { [unowned self] (index) in
-            self.ID = Int(self.img[index])!
+        PicPicker.present(from: self, textures: img_tex,canQ: cq,title: "请选择图片") { [unowned self] (index) in
             self.setModelImage(img:self.img[index])
             self.modelImage.borderWidth=2
             resizeCanvas()
@@ -846,7 +684,7 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
                 alert.addAction(title: "完成", style: .cancel)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                let filename = "1_\(self.ObjectName!)_\(self.canvas.defaultImg)"
+                let filename = "2_\(self.ObjectName!)_\(self.canvas.defaultImg)"
                 
                 let contents = try! FileManager.default.contentsOfDirectory(at: path.url, includingPropertiesForKeys: [], options: .init(rawValue: 0))
                 try? Zip.zipFiles(paths: contents, zipFilePath: Path.documents().resource(filename).url, password: nil, progress: nil)
@@ -893,7 +731,6 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
                 self.canvas.defaultImg="\(path.url.lastPathComponent.split(separator: "_")[2])"
                 self.ObjectName="\(path.url.lastPathComponent.split(separator: "_")[1])"
                 print("path:",self.canvas.defaultImg)
-                self.ID=Int(self.canvas.defaultImg)!
                 self.setModelImage(img:self.canvas.defaultImg)
                 self.resizeCanvas()
                 self.modelImage.borderWidth=2
@@ -986,13 +823,8 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     
 }
 
-extension UIColor{
-    func UIColorFromRGB(R:Int,G:Int,B:Int)->UIColor{
-        return UIColor(red:CGFloat(R),green: CGFloat(G),blue: CGFloat(B),alpha: CGFloat(1));
-    }
-}
 
-extension ViewController: DataObserver {
+extension TransViewController: DataObserver {
     /// called when a line strip is begin
     func lineStrip(_ strip: LineStrip, didBeginOn data: CanvasData) {
         self.redoButton.isEnabled = false
@@ -1024,133 +856,3 @@ extension ViewController: DataObserver {
         self.needSave=true
     }
 }
-
-extension String {
-    var floatValue: CGFloat {
-        let db = Double(self) ?? 0
-        return CGFloat(db)
-    }
-    func substring(from index:Int)->String{
-        guard let start_index=validStartIndex(original:index) else{
-            return self
-        }
-        return String(self[start_index..<endIndex])
-    }
-    func substring(to index:Int)->String{
-        guard let end_index=validStartIndex(original:index) else{
-            return self
-        }
-        return String(self[startIndex..<end_index])
-    }
-    
-    private func validStartIndex(original:Int)->String.Index?{
-        guard original<=endIndex.encodedOffset else{return nil}
-        return validIndex(original:original)
-    }
-    private func validIndex(original:Int)->String.Index{
-        switch original {
-        case ...startIndex.encodedOffset:return startIndex
-        case endIndex.encodedOffset...:return endIndex
-            
-        default:return index(startIndex,offsetBy: original)
-        }
-    }
-}
-
-
-
-
-extension UIView{
-    func asImage()->UIImage{
-        let format = UIGraphicsImageRendererFormat()
-                format.prefersExtendedRange = true
-                let renderer = UIGraphicsImageRenderer.init(bounds: bounds, format: format)
-        let image = renderer.image {
-                    context in
-//                    context.cgContext.concatenate(CGAffineTransform.identity.scaledBy(x: 1, y: 1))
-                    return layer.render(in: context.cgContext)
-                }
-        return image
-    }
-}
-
-
-class PicCoCell: UICollectionViewCell {
-    
-    @IBOutlet weak var color: UILabel!
-    @IBOutlet weak var name: UILabel!
-}
-
-struct color {
-    var R:Int;
-    var G:Int;
-    var B:Int;
-    var name:String;
-}
-var colors:[color]=[
-    
-    color(R:188,G:230,B:114,name:"松花色"),
-    color(R:201,G:221,B:34,name:"柳黄"),
-    color(R:189,G:221,B:34,name:"嫩绿"),
-    color(R:175,G:221,B:34,name:"柳绿"),
-    color(R:158,G:217,B:0,name:"葱绿"),
-    color(R:147,G:208,B:72,name:"豆绿"),
-    
-    color(R:150,G:206,B:84,name:"豆青"),
-    color(R:0,G:188,B:18,name:"油绿"),
-    color(R:0,G:224,B:121,name:"青翠"),
-    color(R:0,G:224,B:158,name:"青色"),
-    color(R:61,G:225,B:173,name:"翡翠色"),
-    color(R:123,G:207,B:166,name:"石青"),
-    
-    color(R:68,G:206,B:246,name:"蓝色"),
-    color(R:62,G:237,B:231,name:"碧蓝"),
-    color(R:23,G:124,B:176,name:"靛青"),
-    color(R:6,G:82,B:121,name:"靛蓝"),
-    color(R:0,G:52,B:114,name:"花青"),
-    color(R:0,G:51,B:113,name:"绀青"),
-    
-    color(R:86,G:0,B:79,name:"紫棠"),
-    color(R:128,G:29,B:174,name:"青莲"),
-    color(R:176,G:164,B:227,name:"血青"),
-    color(R:204,G:164,B:227,name:"丁香"),
-    color(R:237,G:206,B:216,name:"藕色"),
-    color(R:161,G:175,B:201,name:"蓝灰色"),
-    
-    color(R:234,G:255,B:86,name:"樱草色"),
-    color(R:255,G:231,B:67,name:"鹅黄"),
-    color(R:250,G:255,B:114,name:"鸭黄"),
-    color(R:255,G:166,B:49,name:"杏黄"),
-    color(R:255,G:164,B:0,name:"橙黄"),
-    color(R:255,G:117,B:0,name:"橘红"),
-    
-    color(R:211,G:177,B:125,name:"枯黄"),
-    color(R:226,G:156,B:69,name:"黄栌"),
-    color(R:167,G:142,B:68,name:"乌金"),
-    color(R:202,G:105,B:36,name:"琥珀"),
-    color(R:179,G:92,B:68,name:"茶色"),
-    color(R:155,G:68,B:0,name:"棕红"),
-    
-    color(R:255,G:70,B:31,name:"朱砂"),
-    color(R:237,G:87,B:54,name:"妃色"),
-    color(R:255,G:179,B:167,name:"粉红"),
-    color(R:244,G:121,B:131,name:"桃红"),
-    color(R:219,G:90,B:107,name:"海棠红"),
-    color(R:255,G:45,B:81,name:"火红"),
-    
-    color(R:233,G:231,B:239,name:"银白"),
-    color(R:240,G:240,B:244,name:"铅白"),
-    color(R:233,G:241,B:246,name:"霜色"),
-    color(R:240,G:252,B:255,name:"雪白"),
-    color(R:255,G:251,B:240,name:"象牙白"),
-    color(R:242,G:236,B:222,name:"缟"),
-    
-    
-    
-    
-]
-
-
-
-
-var httpURL:String = "http:192.168.172.228:5000"
